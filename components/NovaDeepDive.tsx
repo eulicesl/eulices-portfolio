@@ -12,6 +12,8 @@ export function NovaDeepDive() {
         Most &ldquo;React Native&rdquo; apps lean on JavaScript wrappers.
         N.O.V.A. ships 8 custom Swift modules — real platform integration, not
         Expo plugins — plus a comprehensive test suite guarding every change.
+        Source is private while I finish cleaning it up; happy to share during
+        interviews.
       </p>
 
       <div className="featured" style={{ marginTop: 32 }}>

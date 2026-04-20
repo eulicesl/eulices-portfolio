@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Eulices Lopez — Applied AI Engineer",
+  title: "Eulices Lopez — Founding Engineer",
   description:
-    "Applied AI Engineer shipping production AI for regulated healthcare and native iOS. 6 apps, 2,200+ users, featured case study on Omi.",
+    "Founding Engineer · Built & deployed an AI scribe at Graham Dermatology (featured case study on Omi). 6 products shipped, 2,200+ users. Python, FastAPI, Swift, React Native.",
   openGraph: {
-    title: "Eulices Lopez — Applied AI Engineer",
+    title: "Eulices Lopez — Founding Engineer",
     description:
-      "Production AI for healthcare workflows. Featured case study on Omi. 6 shipped apps. 2,200+ users.",
+      "Featured case study on Omi. 6 products shipped. 2,200+ users. Find the problem, ship the product, own it in production.",
     type: "website",
   },
 };

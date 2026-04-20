@@ -29,10 +29,10 @@ export function Contact() {
       <div className="section-label">Get in touch</div>
       <h2>Looking for my next role.</h2>
       <p className="contact-intro">
-        Open to <em>Applied AI</em>, <em>Forward Deployed</em>, and{" "}
-        <em>Healthcare AI</em> engineering roles. Remote or hybrid (North
-        Carolina Triangle). The best projects are ones where a real user&apos;s
-        workflow is on the line.
+        Open to <em>Founding Engineer</em>, <em>Forward Deployed Engineer</em>,
+        and senior <em>Applied AI</em> roles. Burlington, NC — remote or
+        Triangle-area hybrid. The best projects are ones where a real
+        user&apos;s workflow is on the line.
       </p>
 
       <div className="links">

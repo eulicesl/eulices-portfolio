@@ -12,6 +12,7 @@ export function CaseStudy() {
         Designed and deployed an always-on AI scribe for a dermatology clinic
         seeing 70 patients a day. Structured prompts, EMR-compatible note
         generation, and a real workflow that clinicians actually use.
+        Deployed 2024–2025; case study published November 2025.
       </p>
 
       <RevealSectionInner>

@@ -3,20 +3,19 @@ import { caseStudy } from "@/lib/content";
 export function Hero() {
   return (
     <section className="hero section">
-      <div className="eyebrow">Applied AI Engineer · North Carolina</div>
+      <div className="eyebrow">Founding Engineer · Forward Deployed · 2024–2026</div>
       <h1>
-        I ship <em>production AI</em> in regulated industries — and it stays
-        shipped.
+        I find the problem, <em>ship the product</em>, and own it in production.
       </h1>
       <p className="lede">
-        Six apps shipped — four on the Omi platform with{" "}
-        <strong>2,200+ users</strong>, plus two native iOS apps in public beta
-        on TestFlight (one with <strong>~5,000 LOC of custom Swift</strong> and
-        a comprehensive test suite). A HIPAA-compliant scribe integrated into
-        an EMR workflow and{" "}
-        <strong>featured as a customer case study on Omi</strong>. Built with
-        Python, FastAPI, Swift, and React Native against real production
-        constraints.
+        At a dermatology clinic seeing 70 patients a day, I identified the
+        documentation bottleneck, built an AI scribe against it, and got it{" "}
+        <strong>featured as a customer case study on Omi</strong>. Same-day
+        chart completion moved from 60% to 95%. Since then:{" "}
+        <strong>six AI products shipped</strong> — four Omi agents (
+        <strong>2,200+ users</strong>) and two native iOS apps in public beta
+        on TestFlight. I own every step: customer interview → prompt design →
+        native module → deploy → iterate.
       </p>
       <div className="cta-row">
         <a
