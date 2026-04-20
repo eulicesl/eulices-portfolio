@@ -45,15 +45,15 @@ export const nativeApps: NativeApp[] = [
   {
     name: "N.O.V.A. AI",
     description:
-      "Private-by-default iOS AI assistant with dual local AI paths, native Apple integrations, and a heavily-tested architecture spanning custom Swift modules, Live Activities, and OCR workflows.",
+      "Private-by-default iOS AI assistant. Dual on-device inference (Apple Foundation Models + Ollama), 8 custom Swift modules, Live Activities, Vision OCR. Comprehensive test suite, ~5,000 LOC of native Swift.",
     stack: "React Native · Expo SDK 54 · Swift native modules",
     testflight: "https://testflight.apple.com/join/FnAEfXf2",
   },
 ];
 
 export const novaMetrics = [
-  { label: "Test suite", value: "1,885 passing · 28 suites" },
-  { label: "Native Swift", value: "~5,160 LOC · 8 modules" },
+  { label: "Test suite", value: "1,800+ passing · 28 suites" },
+  { label: "Native Swift", value: "~5,000 LOC · 8 modules" },
   { label: "Screens / routes", value: "21 (Expo Router, typed)" },
   { label: "Reusable components", value: "71" },
   { label: "Dependencies", value: "60 prod · 44 dev" },
@@ -73,10 +73,10 @@ export const novaModules = [
 ] as const;
 
 export const novaArchitecture = [
-  "Dual AI provider with graceful fallback — Apple Foundation Models → Ollama",
-  "Local-first state: Jotai atoms + MMKV + iOS Keychain, with web-safe crypto fallback",
-  "Backward-compatible deep-link migration from the legacy scheme to novaai",
-  "Cross-platform .web.ts shadows for native modules so the app still builds cleanly on web for testing",
+  "Dual AI provider with graceful fallback — Apple Intelligence → Ollama",
+  "Local-first state: Jotai atoms + MMKV + iOS Keychain (web crypto fallback)",
+  "Clean deep-link migration (legacy scheme → novaai, backwards-compatible)",
+  "Cross-platform stubs — .web.ts shadows for every native module so the app builds on web for testing",
 ] as const;
 
 export type OmiApp = {

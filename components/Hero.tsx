@@ -5,16 +5,18 @@ export function Hero() {
     <section className="hero section">
       <div className="eyebrow">Applied AI Engineer · North Carolina</div>
       <h1>
-        I build <em>privacy-first AI products</em> and production-grade mobile
-        systems.
+        I ship <em>production AI</em> in regulated industries — and it stays
+        shipped.
       </h1>
       <p className="lede">
-        From deployed clinical workflows to native iOS assistants, I focus on
-        real product value, rigorous architecture, and codebases meant to last.
-        That includes a HIPAA-compliant scribe featured by Omi as a customer
-        case study, plus two public TestFlight apps, including N.O.V.A. with
-        <strong> ~5,160 LOC of custom Swift</strong> and a
-        <strong> 1,885-test suite</strong>.
+        Six apps shipped — four on the Omi platform with{" "}
+        <strong>2,200+ users</strong>, plus two native iOS apps in public beta
+        on TestFlight (one with <strong>~5,000 LOC of custom Swift</strong> and
+        a comprehensive test suite). A HIPAA-compliant scribe integrated into
+        an EMR workflow and{" "}
+        <strong>featured as a customer case study on Omi</strong>. Built with
+        Python, FastAPI, Swift, and React Native against real production
+        constraints.
       </p>
       <div className="cta-row">
         <a

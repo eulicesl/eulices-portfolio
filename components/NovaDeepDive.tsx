@@ -6,13 +6,12 @@ export function NovaDeepDive() {
     <RevealSection>
       <div className="section-label">Deep dive · N.O.V.A.</div>
       <h2>
-        A native iOS codebase with <em>real platform depth</em>.
+        The <em>native</em> half of &ldquo;React Native.&rdquo;
       </h2>
       <p className="section-sub">
-        N.O.V.A. is not a thin JavaScript shell. It combines React Native with
-        custom Swift modules, Apple platform APIs, and CI-backed test coverage
-        to deliver a private-by-default assistant that behaves like a serious
-        native product.
+        Most &ldquo;React Native&rdquo; apps lean on JavaScript wrappers.
+        N.O.V.A. ships 8 custom Swift modules — real platform integration, not
+        Expo plugins — plus a comprehensive test suite guarding every change.
       </p>
 
       <div className="featured" style={{ marginTop: 32 }}>
@@ -47,7 +46,7 @@ export function NovaDeepDive() {
         </div>
 
         <div>
-          <div className="subhead">Engineering decisions</div>
+          <div className="subhead">Architecture</div>
           <ul className="arch-list">
             {novaArchitecture.map((line) => (
               <li key={line}>{renderArchLine(line)}</li>
