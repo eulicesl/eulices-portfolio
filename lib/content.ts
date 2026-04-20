@@ -14,7 +14,7 @@ export const caseStudy = {
   partner: "Omi",
   url: "https://www.omi.me/blogs/case-studies/how-graham-dermatology-uses-omi-to-transform-medical-scribing-and-patient-care",
   description:
-    "Replaced manual charting with an AI workflow that records, transcribes, and generates structured HPI notes for the EZDERM EMR. HIPAA-compliant. Now used daily by the clinic's doctors, nurses, and medical assistants.",
+    "Replaced manual charting with an AI workflow that records, transcribes, and generates structured HPI notes formatted to match the clinic's EZDERM EMR templates. HIPAA-compliant. Now used daily by the clinic's doctors, nurses, and medical assistants.",
   metrics: [
     { label: "Same-day chart completion", value: "60%", after: "95%" },
     { label: "Note error rate", value: "15–20%", after: "<3%" },
@@ -90,7 +90,7 @@ export const omiApps: OmiApp[] = [
   {
     name: "NEVA Dermatology Assistant",
     description:
-      "AI scribe for medical dermatology. Generates structured progress notes from provider–patient transcripts, formatted for the EZDERM EMR.",
+      "AI scribe for medical dermatology. Generates structured progress notes from provider–patient transcripts, formatted to match the clinic's EZDERM EMR templates.",
     installs: "110+",
     rating: "5.0★",
   },
@@ -133,5 +133,5 @@ export const stack = [
   { label: "NLP" },
   { label: "Knowledge graphs" },
   { label: "HIPAA workflows" },
-  { label: "EMR integration" },
+  { label: "EMR-compatible output" },
 ] as const;
