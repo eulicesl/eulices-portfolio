@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { nativeApps } from "@/lib/content";
 import { RevealSection } from "./RevealSection";
 
@@ -16,23 +17,46 @@ export function NativeApps() {
         privacy-first from the ground up.
       </p>
 
-      <div className="apps">
+      <div className="native-stack">
         {nativeApps.map((app) => (
-          <div className="app" key={app.name}>
-            <div className="app-name">{app.name}</div>
-            <div className="app-desc">{app.description}</div>
-            <div className="app-stats">
-              <span className="stat">{app.stack}</span>
+          <article className="native-app" key={app.name}>
+            <div className="native-app-content">
+              <div className="native-app-header">
+                <Image
+                  src={app.icon}
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="app-icon"
+                />
+                <div>
+                  <h3 className="native-app-name">{app.name}</h3>
+                  <div className="native-app-stack">{app.stack}</div>
+                </div>
+              </div>
+              <p className="native-app-desc">{app.description}</p>
+              <a
+                href={app.testflight}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="case-link"
+              >
+                Join the beta on TestFlight <span>↗</span>
+              </a>
             </div>
-            <a
-              href={app.testflight}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="case-link"
-            >
-              Join the beta on TestFlight <span>↗</span>
-            </a>
-          </div>
+            {app.screenshot ? (
+              <div className="native-app-preview">
+                <Image
+                  src={app.screenshot}
+                  alt={app.screenshotAlt}
+                  width={260}
+                  height={563}
+                  className="native-app-shot"
+                  sizes="(max-width: 640px) 160px, 200px"
+                />
+              </div>
+            ) : null}
+          </article>
         ))}
       </div>
     </RevealSection>

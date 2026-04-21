@@ -1,5 +1,7 @@
 import { novaMetrics, novaModules, novaArchitecture } from "@/lib/content";
+import { novaFallbackSnippet } from "@/lib/code";
 import { RevealSection } from "./RevealSection";
+import { CodeWindow } from "./CodeWindow";
 
 export function NovaDeepDive() {
   return (
@@ -46,13 +48,25 @@ export function NovaDeepDive() {
           </div>
         </div>
 
-        <div>
+        <div style={{ marginBottom: 32 }}>
           <div className="subhead">Architecture</div>
           <ul className="arch-list">
             {novaArchitecture.map((line) => (
               <li key={line}>{renderArchLine(line)}</li>
             ))}
           </ul>
+        </div>
+
+        <div>
+          <div className="subhead">
+            Apple Foundation Models → Ollama fallback
+          </div>
+          <CodeWindow
+            code={novaFallbackSnippet.code}
+            lang={novaFallbackSnippet.lang}
+            fileName={novaFallbackSnippet.fileName}
+            note={novaFallbackSnippet.note}
+          />
         </div>
       </div>
     </RevealSection>

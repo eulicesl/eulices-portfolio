@@ -32,6 +32,9 @@ export type NativeApp = {
   description: string;
   stack: string;
   testflight: string;
+  icon: string;
+  screenshot?: string;
+  screenshotAlt: string;
 };
 
 export const nativeApps: NativeApp[] = [
@@ -41,6 +44,9 @@ export const nativeApps: NativeApp[] = [
       "Privacy-first AI assistant for iPhone and iPad. Apple Intelligence on-device by default, optional Ollama local or cloud. Conversation search, memories, document import, voice input, image attachments, and built-in tools.",
     stack: "SwiftUI · iOS 26 · iPadOS 26",
     testflight: "https://testflight.apple.com/join/v8mYExkK",
+    icon: "/apps/lumen-icon.png",
+    screenshot: "/apps/lumen-01-conversation.png",
+    screenshotAlt: "Lumen conversation view on iPhone",
   },
   {
     name: "N.O.V.A. AI",
@@ -48,6 +54,9 @@ export const nativeApps: NativeApp[] = [
       "Private-by-default iOS AI assistant. Dual on-device inference (Apple Foundation Models + Ollama), 8 custom Swift modules, Live Activities, Vision OCR. Comprehensive test suite, ~5,000 LOC of native Swift.",
     stack: "React Native · Expo SDK 54 · Swift native modules",
     testflight: "https://testflight.apple.com/join/FnAEfXf2",
+    icon: "/apps/nova-icon.png",
+    screenshot: "/apps/nova-01.png",
+    screenshotAlt: "N.O.V.A. App Store preview",
   },
 ];
 
