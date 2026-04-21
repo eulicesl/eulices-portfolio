@@ -243,6 +243,35 @@ h1 em {
   transform: translateX(2px);
 }
 
+/* Scroll hint below hero */
+.scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 56px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  text-decoration: none;
+  opacity: 0;
+  animation: fadeUp 0.9s ease-out 0.75s forwards;
+  transition: color 0.2s ease;
+}
+.scroll-hint:hover {
+  color: var(--fg-muted);
+}
+.scroll-hint-chev {
+  display: inline-block;
+  font-size: 13px;
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(4px); opacity: 1; }
+}
+
 /* SECTIONS — border via sibling selector, no !important */
 .section {
   padding: 72px 0;
@@ -259,14 +288,20 @@ h1 em {
   color: var(--fg-muted);
   margin-bottom: 24px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
 }
-.section-label::before {
-  content: "";
-  width: 24px;
-  height: 1px;
-  background: var(--fg-dim);
+.section-num {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  margin-right: 10px;
+  font-weight: 500;
+}
+.section-num::after {
+  content: "/";
+  color: var(--fg-dim);
+  margin-left: 8px;
+  font-weight: 400;
 }
 h2 {
   font-family: var(--serif);
@@ -350,11 +385,6 @@ h2 em {
   color: var(--fg);
   letter-spacing: -0.01em;
   line-height: 1.2;
-}
-.metric .value--compact {
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: 0;
 }
 .metric .value .arrow-change {
   color: var(--accent);
@@ -491,6 +521,23 @@ blockquote cite {
 }
 .stack-pill.accent:hover {
   border-color: rgba(217, 119, 87, 0.6);
+}
+
+/* CI/CD pills — quieter variant below main stack */
+.ci-section {
+  margin-top: 48px;
+}
+.ci-section .subhead {
+  margin-bottom: 14px;
+}
+.ci-pill {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-sm);
+  color: var(--fg-muted);
+  background: transparent;
 }
 
 /* CONTACT */

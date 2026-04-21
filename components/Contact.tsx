@@ -26,7 +26,9 @@ export function Contact() {
 
   return (
     <RevealSection id="contact">
-      <div className="section-label">Get in touch</div>
+      <div className="section-label">
+        <span className="section-num">06</span>Get in touch
+      </div>
       <h2>Looking for my next role.</h2>
       <p className="contact-intro">
         Open to <em>Founding Engineer</em>, <em>Forward Deployed Engineer</em>,

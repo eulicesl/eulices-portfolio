@@ -30,6 +30,16 @@ export function Hero() {
           Get in touch <span className="arrow">→</span>
         </a>
       </div>
+      <a
+        href="#case-study"
+        className="scroll-hint"
+        aria-label="Scroll to case study"
+      >
+        <span>Scroll</span>
+        <span className="scroll-hint-chev" aria-hidden="true">
+          ↓
+        </span>
+      </a>
     </section>
   );
 }

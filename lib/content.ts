@@ -57,7 +57,14 @@ export const novaMetrics = [
   { label: "Screens / routes", value: "21 (Expo Router, typed)" },
   { label: "Reusable components", value: "71" },
   { label: "Dependencies", value: "60 prod · 44 dev" },
-  { label: "CI gates", value: "TS strict · ESLint · Jest · CodeQL · Dep review" },
+] as const;
+
+export const ciGates = [
+  "TypeScript strict",
+  "ESLint",
+  "Jest",
+  "CodeQL",
+  "Dependency review",
 ] as const;
 
 export const novaModules = [

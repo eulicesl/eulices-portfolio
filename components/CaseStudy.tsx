@@ -4,7 +4,9 @@ import { RevealSection } from "./RevealSection";
 export function CaseStudy() {
   return (
     <RevealSection id="case-study">
-      <div className="section-label">Featured work</div>
+      <div className="section-label">
+        <span className="section-num">01</span>Featured work
+      </div>
       <h2>
         Graham Dermatology <em>×</em> Omi
       </h2>

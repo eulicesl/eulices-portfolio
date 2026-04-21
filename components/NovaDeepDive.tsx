@@ -4,7 +4,9 @@ import { RevealSection } from "./RevealSection";
 export function NovaDeepDive() {
   return (
     <RevealSection id="nova">
-      <div className="section-label">Deep dive · N.O.V.A.</div>
+      <div className="section-label">
+        <span className="section-num">03</span>Deep dive · N.O.V.A.
+      </div>
       <h2>
         The <em>native</em> half of &ldquo;React Native.&rdquo;
       </h2>
@@ -26,11 +28,7 @@ export function NovaDeepDive() {
           {novaMetrics.map((m) => (
             <div className="metric" key={m.label}>
               <div className="label">{m.label}</div>
-              <div
-                className={`value${
-                  m.label === "CI gates" ? " value--compact" : ""
-                }`}
-              >
+              <div className="value">
                 {renderValueWithDividers(m.value)}
               </div>
             </div>

@@ -4,7 +4,9 @@ import { RevealSection } from "./RevealSection";
 export function NativeApps() {
   return (
     <RevealSection id="native">
-      <div className="section-label">Native iOS apps · public beta</div>
+      <div className="section-label">
+        <span className="section-num">02</span>Native iOS apps · public beta
+      </div>
       <h2>
         Built end-to-end. <em>Installable today.</em>
       </h2>

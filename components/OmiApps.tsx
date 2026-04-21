@@ -4,7 +4,9 @@ import { RevealSection } from "./RevealSection";
 export function OmiApps() {
   return (
     <RevealSection id="omi">
-      <div className="section-label">On the Omi platform</div>
+      <div className="section-label">
+        <span className="section-num">04</span>On the Omi platform
+      </div>
       <h2>
         Four apps. <em>2,200+ installs.</em>
       </h2>
