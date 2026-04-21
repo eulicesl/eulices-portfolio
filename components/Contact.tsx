@@ -6,19 +6,19 @@ export function Contact() {
     { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
     {
       label: "GitHub",
-      value: "github.com/eulicesl →",
+      value: "github.com/eulicesl ↗",
       href: profile.github,
       external: true,
     },
     {
       label: "LinkedIn",
-      value: "in/euliceslopez →",
+      value: "in/euliceslopez ↗",
       href: profile.linkedin,
       external: true,
     },
     {
       label: "Case study",
-      value: "Omi × Graham Dermatology →",
+      value: "Omi × Graham Dermatology ↗",
       href: caseStudy.url,
       external: true,
     },

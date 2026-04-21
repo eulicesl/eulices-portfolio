@@ -1,7 +1,29 @@
 import type { Metadata } from "next";
+import { Fraunces, Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["SOFT", "opsz"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://eulices-portfolio.vercel.app"),
   title: "Eulices Lopez — Founding Engineer",
   description:
     "Founding Engineer · Built & deployed an AI scribe at Graham Dermatology (featured case study on Omi). 6 products shipped, 2,200+ users. Python, FastAPI, Swift, React Native.",
@@ -10,6 +32,14 @@ export const metadata: Metadata = {
     description:
       "Featured case study on Omi. 6 products shipped. 2,200+ users. Find the problem, ship the product, own it in production.",
     type: "website",
+    url: "/",
+    siteName: "Eulices Lopez",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eulices Lopez — Founding Engineer",
+    description:
+      "Built & deployed an AI scribe at Graham Dermatology (featured on Omi). 6 products shipped, 2,200+ users.",
   },
 };
 
@@ -19,19 +49,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Geist:wght@300..600&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${geist.variable} ${jetbrains.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

@@ -3,7 +3,7 @@ import { RevealSection } from "./RevealSection";
 
 export function OmiApps() {
   return (
-    <RevealSection>
+    <RevealSection id="omi">
       <div className="section-label">On the Omi platform</div>
       <h2>
         Four apps. <em>2,200+ installs.</em>

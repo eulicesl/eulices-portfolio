@@ -3,7 +3,7 @@ import { RevealSection } from "./RevealSection";
 
 export function NativeApps() {
   return (
-    <RevealSection>
+    <RevealSection id="native">
       <div className="section-label">Native iOS apps · public beta</div>
       <h2>
         Built end-to-end. <em>Installable today.</em>
@@ -19,7 +19,7 @@ export function NativeApps() {
           <div className="app" key={app.name}>
             <div className="app-name">{app.name}</div>
             <div className="app-desc">{app.description}</div>
-            <div className="app-stats" style={{ marginBottom: 18 }}>
+            <div className="app-stats">
               <span className="stat">{app.stack}</span>
             </div>
             <a
@@ -28,7 +28,7 @@ export function NativeApps() {
               rel="noopener noreferrer"
               className="case-link"
             >
-              Join the beta on TestFlight <span>→</span>
+              Join the beta on TestFlight <span>↗</span>
             </a>
           </div>
         ))}

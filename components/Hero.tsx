@@ -2,7 +2,7 @@ import { caseStudy } from "@/lib/content";
 
 export function Hero() {
   return (
-    <section className="hero section">
+    <section className="hero section" id="top">
       <div className="eyebrow">Founding Engineer · Forward Deployed · 2024–2026</div>
       <h1>
         I find the problem, <em>ship the product</em>, and own it in production.
@@ -24,10 +24,10 @@ export function Hero() {
           rel="noopener noreferrer"
           className="btn btn-primary"
         >
-          Read the case study <span className="arrow">→</span>
+          Read the case study <span className="arrow">↗</span>
         </a>
         <a href="#contact" className="btn btn-secondary">
-          Get in touch
+          Get in touch <span className="arrow">→</span>
         </a>
       </div>
     </section>

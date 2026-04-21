@@ -3,7 +3,7 @@ import { RevealSection } from "./RevealSection";
 
 export function NovaDeepDive() {
   return (
-    <RevealSection>
+    <RevealSection id="nova">
       <div className="section-label">Deep dive · N.O.V.A.</div>
       <h2>
         The <em>native</em> half of &ldquo;React Native.&rdquo;
@@ -27,8 +27,9 @@ export function NovaDeepDive() {
             <div className="metric" key={m.label}>
               <div className="label">{m.label}</div>
               <div
-                className="value"
-                style={m.label === "CI gates" ? { fontSize: 15 } : undefined}
+                className={`value${
+                  m.label === "CI gates" ? " value--compact" : ""
+                }`}
               >
                 {renderValueWithDividers(m.value)}
               </div>
@@ -60,7 +61,6 @@ export function NovaDeepDive() {
   );
 }
 
-// Render "·" as orange accent dividers inside metric values
 function renderValueWithDividers(value: string) {
   const parts = value.split(/\s·\s/);
   return parts.map((part, i) => (
@@ -71,7 +71,6 @@ function renderValueWithDividers(value: string) {
   ));
 }
 
-// Wrap inline code-like tokens (novaai, .web.ts) in <code>
 function renderArchLine(line: string) {
   const tokens = [/novaai/g, /\.web\.ts/g];
   let out: (string | React.ReactElement)[] = [line];
@@ -84,7 +83,9 @@ function renderArchLine(line: string) {
       pieces.forEach((p, pIdx) => {
         merged.push(p);
         if (pIdx < matches.length) {
-          merged.push(<code key={`${idx}-${cIdx}-${pIdx}`}>{matches[pIdx]}</code>);
+          merged.push(
+            <code key={`${idx}-${cIdx}-${pIdx}`}>{matches[pIdx]}</code>,
+          );
         }
       });
       return merged;
