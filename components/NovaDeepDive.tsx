@@ -1,4 +1,10 @@
-import { novaMetrics, novaModules, novaArchitecture } from "@/lib/content";
+import Image from "next/image";
+import {
+  novaMetrics,
+  novaModules,
+  novaArchitecture,
+  novaShots,
+} from "@/lib/content";
 import { novaFallbackSnippet } from "@/lib/code";
 import { RevealSection } from "./RevealSection";
 import { CodeWindow } from "./CodeWindow";
@@ -57,7 +63,7 @@ export function NovaDeepDive() {
           </ul>
         </div>
 
-        <div>
+        <div style={{ marginBottom: 32 }}>
           <div className="subhead">
             Apple Foundation Models → Ollama fallback
           </div>
@@ -67,6 +73,28 @@ export function NovaDeepDive() {
             fileName={novaFallbackSnippet.fileName}
             note={novaFallbackSnippet.note}
           />
+        </div>
+
+        <div>
+          <div className="subhead">Running on device</div>
+          <div className="nova-shots">
+            {novaShots.map((shot) => (
+              <figure className="nova-shot" key={shot.src}>
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={260}
+                  height={563}
+                  className="nova-shot-img"
+                  sizes="(max-width: 640px) 140px, 200px"
+                />
+                <figcaption>
+                  <span className="nova-shot-caption">{shot.caption}</span>
+                  <span className="nova-shot-note">{shot.note}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </RevealSection>

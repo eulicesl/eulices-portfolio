@@ -88,6 +88,27 @@ export const novaModules = [
   "Activity controller",
 ] as const;
 
+export const novaShots = [
+  {
+    src: "/apps/nova-settings.png",
+    alt: "N.O.V.A. Settings · Advanced with 12 tool permissions, Documents + OCR, Memory, Calendar access granted",
+    caption: "Settings · Advanced",
+    note: "12 tool permissions · Calendar granted · OCR + Memory",
+  },
+  {
+    src: "/apps/nova-reminders.png",
+    alt: "N.O.V.A. summarizing 65 pending reminders pulled through EventKit",
+    caption: "EventKit in use",
+    note: "Tool call: Get Reminders · 65 pending summarized",
+  },
+  {
+    src: "/apps/nova-code.png",
+    alt: "N.O.V.A. rendering JavaScript samples with syntax highlighting",
+    caption: "Code rendering",
+    note: "Syntax-highlighted markdown · Hello World → Fibonacci",
+  },
+] as const;
+
 export const novaArchitecture = [
   "Dual AI provider with graceful fallback — Apple Intelligence → Ollama",
   "Local-first state: Jotai atoms + MMKV + iOS Keychain (web crypto fallback)",
