@@ -56,7 +56,7 @@ export const nativeApps: NativeApp[] = [
     testflight: "https://testflight.apple.com/join/FnAEfXf2",
     icon: "/apps/nova-icon.png",
     screenshot: "/apps/nova-01.png",
-    screenshotAlt: "N.O.V.A. App Store preview",
+    screenshotAlt: "N.O.V.A. home screen on iPhone",
   },
 ];
 
