@@ -97,9 +97,9 @@ export const novaShots = [
   },
   {
     src: "/apps/nova-reminders.png",
-    alt: "N.O.V.A. summarizing 65 pending reminders pulled through EventKit",
+    alt: "N.O.V.A. invoking the Get Reminders tool via EventKit",
     caption: "EventKit in use",
-    note: "Tool call: Get Reminders · 65 pending summarized",
+    note: "Tool call: Get Reminders · native iOS Reminders bridge",
   },
   {
     src: "/apps/nova-code.png",
