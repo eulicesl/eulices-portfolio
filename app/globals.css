@@ -62,9 +62,9 @@
   /* CHAPTER BACKGROUNDS — subtle warm/cool modulations of --bg.
      Use as punctuation between sections; never as wallpaper. */
   --chapter-a: #0a0907;
-  --chapter-b: #0d0b08;
-  --chapter-c: #080709;
-  --chapter-d: #120f0a;
+  --chapter-b: #100d09;
+  --chapter-c: #07070b;
+  --chapter-d: #140f0a;
 
   /* MOTION */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
@@ -125,19 +125,10 @@ body::before {
   z-index: 2;
 }
 
-/* NAV — sticky, blurred, Apple-style */
+/* NAV — full-bleed sticky shell with inner wrapped grid */
 .nav-bar {
   position: sticky;
   top: 0;
-  padding: 18px 0 14px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 24px;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.02em;
-  color: var(--fg-muted);
   z-index: 10;
   background: linear-gradient(
     to bottom,
@@ -147,6 +138,17 @@ body::before {
   );
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+.nav-bar-inner {
+  padding: 18px var(--wrap-pad) 14px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
 }
 .nav-bar .sig {
   color: var(--fg);
@@ -292,11 +294,14 @@ h1 em {
   transform: translateX(2px);
 }
 
-/* Scroll hint anchored at the bottom of the hero stage */
+/* Scroll hint anchored at the bottom of the hero stage, aligned with wrap edge */
 .scroll-hint {
   position: absolute;
   bottom: 48px;
-  left: var(--wrap-pad);
+  left: max(
+    var(--wrap-pad),
+    calc((100vw - var(--wrap-max)) / 2 + var(--wrap-pad))
+  );
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -323,13 +328,20 @@ h1 em {
   50%      { transform: translateY(4px); opacity: 1; }
 }
 
-/* SECTIONS — border via sibling selector, no !important */
+/* SECTIONS — full-bleed, inner .wrap holds content */
 .section {
-  padding: 72px 0;
+  padding: var(--section-y-sm) 0;
+  position: relative;
+  transition: background-color var(--dur-med) var(--ease-out-quart);
 }
 .section + .section {
   border-top: 1px solid var(--border-soft);
 }
+/* Chapter bg modulations — subtle warm/cool punctuation between stages */
+.section.chapter-a { background: var(--chapter-a); }
+.section.chapter-b { background: var(--chapter-b); }
+.section.chapter-c { background: var(--chapter-c); }
+.section.chapter-d { background: var(--chapter-d); }
 
 .section-label {
   font-family: var(--mono);
@@ -1009,8 +1021,11 @@ blockquote cite {
 }
 
 /* FOOTER */
+.footer-outer {
+  border-top: 1px solid var(--border-soft);
+}
 .footer {
-  padding: 48px 0 60px;
+  padding: 48px var(--wrap-pad) 60px;
   font-family: var(--mono);
   font-size: 11px;
   color: var(--fg-dim);

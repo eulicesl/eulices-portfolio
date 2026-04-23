@@ -11,7 +11,7 @@ import { CodeWindow } from "./CodeWindow";
 
 export function NovaDeepDive() {
   return (
-    <RevealSection id="nova">
+    <RevealSection id="nova" chapter="c">
       <div className="section-label">
         <span className="section-num">03</span>Deep dive · N.O.V.A.
       </div>

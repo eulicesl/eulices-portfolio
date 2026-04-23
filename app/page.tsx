@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="wrap">
+    <>
       <Nav />
       <Hero />
       <CaseStudy />
@@ -20,6 +20,6 @@ export default function Home() {
       <Stack />
       <Contact />
       <Footer />
-    </div>
+    </>
   );
 }
