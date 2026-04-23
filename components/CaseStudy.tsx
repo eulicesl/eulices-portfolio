@@ -17,6 +17,25 @@ export function CaseStudy() {
         Deployed 2024–2025; case study published November 2025.
       </p>
 
+      <div className="metrics-poster" aria-label="Clinic outcomes">
+        {caseStudy.metrics.map((m) => (
+          <figure className="metric-card" key={m.label}>
+            <figcaption className="metric-card-label">{m.label}</figcaption>
+            <div className="metric-card-value">
+              <span className="metric-card-before">{m.value}</span>
+              {"after" in m && m.after ? (
+                <>
+                  <span className="metric-card-arrow" aria-hidden="true">
+                    →
+                  </span>
+                  <span className="metric-card-after">{m.after}</span>
+                </>
+              ) : null}
+            </div>
+          </figure>
+        ))}
+      </div>
+
       <div className="featured">
         <div className="featured-header">
           <div className="featured-title">
@@ -25,29 +44,6 @@ export function CaseStudy() {
           <div className="featured-partner">Partner · Omi</div>
         </div>
         <p className="desc">{caseStudy.description}</p>
-
-        <div className="metrics">
-          {caseStudy.metrics.map((m) => (
-            <div className="metric" key={m.label}>
-              <div className="label">{m.label}</div>
-              <div className="value">
-                {m.value}
-                {"after" in m && m.after ? (
-                  <>
-                    {" "}
-                    <span className="arrow-change">→</span> {m.after}
-                  </>
-                ) : null}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <blockquote>
-          {caseStudy.quote.text}
-          <cite>— {caseStudy.quote.cite}</cite>
-        </blockquote>
-
         <a
           href={caseStudy.url}
           target="_blank"
@@ -57,6 +53,15 @@ export function CaseStudy() {
           Full case study on omi.me <span>↗</span>
         </a>
       </div>
+
+      <figure className="quote-stage">
+        <blockquote className="pull-quote">
+          {caseStudy.quote.text}
+        </blockquote>
+        <figcaption className="pull-quote-cite">
+          — {caseStudy.quote.cite}
+        </figcaption>
+      </figure>
     </RevealSection>
   );
 }
