@@ -32,6 +32,48 @@
 
   --wrap-pad: 32px;
   --wrap-max: 760px;
+  --wrap-wide: 1120px;
+
+  /* TYPOGRAPHIC SCALE — fluid, Apple-inspired.
+     Each step respects a minimum for mobile and a ceiling for huge viewports. */
+  --t-display-xl: clamp(56px, 9vw, 128px);
+  --t-display-lg: clamp(44px, 7vw, 96px);
+  --t-display-md: clamp(36px, 5.5vw, 72px);
+  --t-headline: clamp(28px, 4vw, 48px);
+  --t-title: clamp(22px, 2.5vw, 32px);
+  --t-body-lg: clamp(18px, 1.4vw, 21px);
+  --t-body: 17px;
+  --t-caption: 13px;
+
+  /* Tracking (letter-spacing) tokens — tighter at display sizes */
+  --tr-display: -0.035em;
+  --tr-headline: -0.022em;
+  --tr-title: -0.014em;
+  --tr-body: -0.003em;
+  --tr-caption: 0.02em;
+
+  /* VERTICAL RHYTHM — stage heights + section spacing */
+  --stage-tall: 100svh;
+  --stage-md: 80svh;
+  --stage-sm: 60svh;
+  --section-y: clamp(80px, 12vw, 160px);
+  --section-y-sm: clamp(56px, 8vw, 96px);
+
+  /* CHAPTER BACKGROUNDS — subtle warm/cool modulations of --bg.
+     Use as punctuation between sections; never as wallpaper. */
+  --chapter-a: #0a0907;
+  --chapter-b: #0d0b08;
+  --chapter-c: #080709;
+  --chapter-d: #120f0a;
+
+  /* MOTION */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-quick: 200ms;
+  --dur-med: 400ms;
+  --dur-slow: 700ms;
+  --dur-stage: 900ms;
 }
 
 * {
@@ -935,4 +977,105 @@ blockquote cite {
 ::selection {
   background: var(--accent);
   color: #1a0e08;
+}
+
+/* =========================================================
+   FOUNDATION PRIMITIVES (Phase 1 — consumed by later phases)
+   No visual change until opted into via className.
+   ========================================================= */
+
+/* Stage — full-height vertical-rhythm section */
+.stage {
+  min-height: var(--stage-tall);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--section-y) 0;
+  position: relative;
+}
+.stage-md {
+  min-height: var(--stage-md);
+}
+.stage-sm {
+  min-height: var(--stage-sm);
+}
+
+/* Chapter — bg modulation applied via data attribute or class.
+   Use sparingly: punctuation, not wallpaper. */
+.chapter-a { background: var(--chapter-a); }
+.chapter-b { background: var(--chapter-b); }
+.chapter-c { background: var(--chapter-c); }
+.chapter-d { background: var(--chapter-d); }
+
+/* Typographic utility classes — opt-in.
+   Existing h1/h2/h3 are unchanged; later phases swap these in. */
+.t-display-xl {
+  font-family: var(--serif);
+  font-size: var(--t-display-xl);
+  line-height: 0.98;
+  letter-spacing: var(--tr-display);
+  font-weight: 400;
+}
+.t-display-lg {
+  font-family: var(--serif);
+  font-size: var(--t-display-lg);
+  line-height: 1.02;
+  letter-spacing: var(--tr-display);
+  font-weight: 400;
+}
+.t-display-md {
+  font-family: var(--serif);
+  font-size: var(--t-display-md);
+  line-height: 1.06;
+  letter-spacing: var(--tr-display);
+  font-weight: 400;
+}
+.t-headline {
+  font-family: var(--serif);
+  font-size: var(--t-headline);
+  line-height: 1.12;
+  letter-spacing: var(--tr-headline);
+  font-weight: 400;
+}
+.t-title {
+  font-family: var(--sans);
+  font-size: var(--t-title);
+  line-height: 1.2;
+  letter-spacing: var(--tr-title);
+  font-weight: 600;
+}
+.t-body-lg {
+  font-family: var(--sans);
+  font-size: var(--t-body-lg);
+  line-height: 1.55;
+  letter-spacing: var(--tr-body);
+  color: var(--fg-muted);
+}
+.t-caption {
+  font-family: var(--mono);
+  font-size: var(--t-caption);
+  letter-spacing: var(--tr-caption);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+/* Wide wrap for stages that need room to breathe (posters, large type) */
+.wrap-wide {
+  max-width: var(--wrap-wide);
+  margin: 0 auto;
+  padding: 0 var(--wrap-pad);
+  position: relative;
+  z-index: 2;
+}
+
+/* Reduced-motion universal override — honored across all phases */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
