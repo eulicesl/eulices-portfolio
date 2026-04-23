@@ -106,7 +106,7 @@ Raw JSON reports + methodology + remaining opportunities in [`lighthouse/`](./li
 
 ## Redesign log
 
-The current design landed as PR [#2](https://github.com/eulicesl/eulices-portfolio/pull/2), shipped in six atomic phases on a single `redesign` branch:
+The current design landed as PR [#2](https://github.com/eulicesl/eulices-portfolio/pull/2), shipped in seven atomic phases on a single `redesign` branch:
 
 1. **Foundation** — fluid type scale, tracking ladder, vertical-rhythm tokens, chapter + motion tokens, reduced-motion override. Opt-in only.
 2. **Hero** — 100svh stage, display-xl headline, anchored scroll hint.
@@ -114,6 +114,7 @@ The current design landed as PR [#2](https://github.com/eulicesl/eulices-portfol
 4. **Native apps** — each app its own 60svh stage with a 320px phone shot; odd/even alternation for rhythm.
 5. **NOVA deep dive** — hero-scaled metrics with hairline grid, pill tags, bigger arch list, code window + in-the-wild shot row.
 6. **Polish** — reveal motion upgraded to `--ease-out-expo` with 24px travel, README rewrite.
+7. **Chapters** — full-bleed section architecture (each component wraps itself); warm/cool chapter bg modulations applied as punctuation between sections.
 
 Each phase is a single commit with full rationale in the message body. Reads like a changelog.
 
