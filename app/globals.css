@@ -337,11 +337,6 @@ h1 em {
 .section + .section {
   border-top: 1px solid var(--border-soft);
 }
-/* Chapter bg modulations — subtle warm/cool punctuation between stages */
-.section.chapter-a { background: var(--chapter-a); }
-.section.chapter-b { background: var(--chapter-b); }
-.section.chapter-c { background: var(--chapter-c); }
-.section.chapter-d { background: var(--chapter-d); }
 
 .section-label {
   font-family: var(--mono);
@@ -1096,12 +1091,14 @@ blockquote cite {
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-  .wrap {
+  .wrap,
+  .wrap-wide {
     padding: 0 28px;
   }
 }
 @media (max-width: 640px) {
-  .wrap {
+  .wrap,
+  .wrap-wide {
     padding: 0 22px;
   }
   .hero {
@@ -1192,12 +1189,16 @@ blockquote cite {
   min-height: var(--stage-sm);
 }
 
-/* Chapter — bg modulation applied via data attribute or class.
-   Use sparingly: punctuation, not wallpaper. */
-.chapter-a { background: var(--chapter-a); }
-.chapter-b { background: var(--chapter-b); }
-.chapter-c { background: var(--chapter-c); }
-.chapter-d { background: var(--chapter-d); }
+/* Chapter — bg modulation applied via class or [data-chapter] attribute.
+   Use sparingly: punctuation between sections, not wallpaper. */
+.chapter-a,
+[data-chapter="a"] { background: var(--chapter-a); }
+.chapter-b,
+[data-chapter="b"] { background: var(--chapter-b); }
+.chapter-c,
+[data-chapter="c"] { background: var(--chapter-c); }
+.chapter-d,
+[data-chapter="d"] { background: var(--chapter-d); }
 
 /* Typographic utility classes — opt-in.
    Existing h1/h2/h3 are unchanged; later phases swap these in. */
@@ -1242,6 +1243,12 @@ blockquote cite {
   line-height: 1.55;
   letter-spacing: var(--tr-body);
   color: var(--fg-muted);
+}
+.t-body {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  letter-spacing: var(--tr-body);
 }
 .t-caption {
   font-family: var(--mono);
