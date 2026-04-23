@@ -157,7 +157,7 @@ Current Lighthouse accessibility score: **100** on both desktop and mobile (post
 
 ### Font-loading tradeoff
 
-Fraunces is loaded with `display: "optional"` rather than `"swap"`. This prioritizes LCP on the Lighthouse mobile profile (Slow 4G), where the italic variable file (~149 KB) otherwise stretches Largest Contentful Paint to ~3.3 s.
+Fraunces is loaded with `display: "optional"` in [`app/layout.tsx`](../app/layout.tsx) rather than `"swap"`. This prioritizes LCP on the Lighthouse mobile profile (Slow 4G), where the italic variable file (~149 KB) otherwise stretches Largest Contentful Paint to ~3.3 s.
 
 With `"optional"`, the browser enforces a tight ~100 ms block window; if Fraunces hasn't arrived, it uses the size-adjusted system-serif fallback for that session. On every viewport with a reasonable network and every repeat visit (font cached), Fraunces loads within the window and renders as designed.
 
