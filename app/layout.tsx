@@ -2,12 +2,21 @@ import type { Metadata } from "next";
 import { Fraunces, Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+// Fraunces uses display: "optional" to prioritize LCP. On the Lighthouse
+// mobile profile (Slow 4G), the italic variable file (~149 KB) blows past
+// the swap window and stretches LCP to ~3.3 s. With "optional" the browser
+// enforces a ~100 ms block window and falls back to the size-adjusted
+// system serif if Fraunces hasn't arrived — LCP lands at FCP (~945 ms).
+// The only cost: slow-mobile first-time visitors see the fallback for
+// that session. On every other viewport and repeat visit, Fraunces wins
+// well within the block window and renders as intended.
+// Tradeoff documented in docs/DESIGN.md.
 const fraunces = Fraunces({
   subsets: ["latin"],
   style: ["normal", "italic"],
   axes: ["SOFT", "opsz"],
   variable: "--font-serif",
-  display: "swap",
+  display: "optional",
 });
 
 const geist = Geist({

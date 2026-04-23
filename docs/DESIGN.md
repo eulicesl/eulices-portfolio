@@ -155,6 +155,16 @@ Baseline commitments:
 
 Current Lighthouse accessibility score: **100** on both desktop and mobile (post-`<main>` landmark fix, captured 2026-04-23).
 
+### Font-loading tradeoff
+
+Fraunces is loaded with `display: "optional"` rather than `"swap"`. This prioritizes LCP on the Lighthouse mobile profile (Slow 4G), where the italic variable file (~149 KB) otherwise stretches Largest Contentful Paint to ~3.3 s.
+
+With `"optional"`, the browser enforces a tight ~100 ms block window; if Fraunces hasn't arrived, it uses the size-adjusted system-serif fallback for that session. On every viewport with a reasonable network and every repeat visit (font cached), Fraunces loads within the window and renders as designed.
+
+The cost: slow-mobile first-time visitors see the system-serif fallback hero instead of Fraunces until their next visit. That's a deliberate tradeoff — LCP is an SEO/perceived-performance signal that matters, and the primary audience (senior hiring managers on fast desktop/laptop networks) always gets Fraunces. Geist and JetBrains Mono stay on `"swap"` because their smaller file sizes never miss the block window.
+
+Revisit this decision if: (a) the font files shrink enough to reliably land inside a "swap" budget, or (b) mobile-first-time-visitor UX becomes a priority over LCP scoring.
+
 ---
 
 ## Responsive strategy
