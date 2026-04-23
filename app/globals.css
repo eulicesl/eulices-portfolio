@@ -191,30 +191,35 @@ body::before {
   }
 }
 
-/* HERO */
+/* HERO — stage-scale */
 .hero {
-  padding: 120px 0 100px;
+  min-height: var(--stage-tall);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px 0 120px;
+  position: relative;
 }
 .eyebrow {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: var(--t-caption);
+  letter-spacing: var(--tr-caption);
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   opacity: 0;
-  animation: fadeUp 0.8s ease-out 0.1s forwards;
+  animation: fadeUp 0.8s var(--ease-out-quart) 0.1s forwards;
 }
 h1 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(40px, 6.5vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: var(--t-display-xl);
+  line-height: 0.98;
+  letter-spacing: var(--tr-display);
   font-variation-settings: "opsz" 144, "SOFT" 50;
-  margin-bottom: 28px;
+  margin-bottom: 40px;
   opacity: 0;
-  animation: fadeUp 0.9s ease-out 0.25s forwards;
+  animation: fadeUp 0.9s var(--ease-out-quart) 0.25s forwards;
 }
 h1 em {
   font-style: italic;
@@ -222,12 +227,14 @@ h1 em {
   font-variation-settings: "opsz" 144, "SOFT" 100;
 }
 .hero p.lede {
-  font-size: 18px;
+  font-size: var(--t-body-lg);
+  line-height: 1.55;
+  letter-spacing: var(--tr-body);
   color: var(--fg-muted);
-  max-width: 540px;
-  margin-bottom: 40px;
+  max-width: 620px;
+  margin-bottom: 48px;
   opacity: 0;
-  animation: fadeUp 0.9s ease-out 0.4s forwards;
+  animation: fadeUp 0.9s var(--ease-out-quart) 0.4s forwards;
 }
 .hero p.lede strong {
   color: var(--fg);
@@ -285,12 +292,14 @@ h1 em {
   transform: translateX(2px);
 }
 
-/* Scroll hint below hero */
+/* Scroll hint anchored at the bottom of the hero stage */
 .scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: var(--wrap-pad);
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 56px;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -298,8 +307,8 @@ h1 em {
   color: var(--fg-dim);
   text-decoration: none;
   opacity: 0;
-  animation: fadeUp 0.9s ease-out 0.75s forwards;
-  transition: color 0.2s ease;
+  animation: fadeUp 0.9s var(--ease-out-quart) 0.9s forwards;
+  transition: color var(--dur-quick) var(--ease-out-quart);
 }
 .scroll-hint:hover {
   color: var(--fg-muted);
@@ -307,7 +316,7 @@ h1 em {
 .scroll-hint-chev {
   display: inline-block;
   font-size: 13px;
-  animation: scrollBounce 2.2s ease-in-out infinite;
+  animation: scrollBounce 2.2s var(--ease-in-out-quart) infinite;
 }
 @keyframes scrollBounce {
   0%, 100% { transform: translateY(0); opacity: 0.55; }
@@ -930,7 +939,11 @@ blockquote cite {
     padding: 0 22px;
   }
   .hero {
-    padding: 80px 0 60px;
+    padding: 96px 0 80px;
+    min-height: var(--stage-md);
+  }
+  .scroll-hint {
+    bottom: 32px;
   }
   .featured {
     padding: 28px 22px;
