@@ -2,13 +2,21 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+type Chapter = "a" | "b" | "c" | "d";
+
 type Props = {
   children: ReactNode;
   className?: string;
   id?: string;
+  chapter?: Chapter;
 };
 
-export function RevealSection({ children, className = "", id }: Props) {
+export function RevealSection({
+  children,
+  className = "",
+  id,
+  chapter,
+}: Props) {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -32,13 +40,19 @@ export function RevealSection({ children, className = "", id }: Props) {
     return () => io.disconnect();
   }, []);
 
+  const classes = [
+    "section",
+    "reveal",
+    visible ? "visible" : "",
+    chapter ? `chapter-${chapter}` : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <section
-      ref={ref}
-      id={id}
-      className={`section reveal ${visible ? "visible" : ""} ${className}`}
-    >
-      {children}
+    <section ref={ref} id={id} className={classes}>
+      <div className="wrap">{children}</div>
     </section>
   );
 }

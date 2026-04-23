@@ -3,7 +3,7 @@ import { RevealSection } from "./RevealSection";
 
 export function CaseStudy() {
   return (
-    <RevealSection id="case-study">
+    <RevealSection id="case-study" chapter="b">
       <div className="section-label">
         <span className="section-num">01</span>Featured work
       </div>
