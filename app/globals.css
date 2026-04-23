@@ -357,21 +357,24 @@ h1 em {
 h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(28px, 4vw, 38px);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  margin-bottom: 20px;
-  font-variation-settings: "opsz" 72;
+  font-size: var(--t-display-md);
+  line-height: 1.06;
+  letter-spacing: var(--tr-display);
+  margin-bottom: 24px;
+  font-variation-settings: "opsz" 96;
 }
 h2 em {
   font-style: italic;
   color: var(--accent);
-  font-variation-settings: "opsz" 72, "SOFT" 100;
+  font-variation-settings: "opsz" 96, "SOFT" 100;
 }
 .section-sub {
+  font-size: var(--t-body-lg);
+  line-height: 1.55;
+  letter-spacing: var(--tr-body);
   color: var(--fg-muted);
-  max-width: 580px;
-  margin-bottom: 8px;
+  max-width: 640px;
+  margin-bottom: 56px;
 }
 
 /* FEATURED */
@@ -462,6 +465,119 @@ blockquote cite {
   color: var(--fg-muted);
   margin-top: 12px;
   letter-spacing: 0.02em;
+}
+
+/* METRICS POSTER — hero-scaled before/after cards */
+.metrics-poster {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin: 0 0 64px;
+}
+.metric-card {
+  margin: 0;
+  padding: 36px 32px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 200px;
+  justify-content: space-between;
+}
+.metric-card-label {
+  font-family: var(--mono);
+  font-size: var(--t-caption);
+  letter-spacing: var(--tr-caption);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.metric-card-value {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1.02;
+  letter-spacing: var(--tr-headline);
+  color: var(--fg);
+  font-variation-settings: "opsz" 96;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.metric-card-before {
+  color: var(--fg-muted);
+}
+.metric-card-arrow {
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 0.6em;
+  position: relative;
+  top: -0.1em;
+}
+.metric-card-after {
+  color: var(--fg);
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+}
+
+/* PULL QUOTE STAGE — own tall section */
+.quote-stage {
+  margin: 96px 0 0;
+  padding: var(--section-y-sm) 0;
+  border-top: 1px solid var(--border-soft);
+  min-height: var(--stage-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+.pull-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--t-headline);
+  line-height: 1.18;
+  letter-spacing: var(--tr-headline);
+  color: var(--fg);
+  font-variation-settings: "opsz" 96, "SOFT" 100;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  max-width: 720px;
+  text-wrap: balance;
+}
+.pull-quote::before {
+  content: "“";
+  color: var(--accent);
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 1em;
+}
+.pull-quote::after {
+  content: "”";
+  color: var(--accent);
+  display: inline-block;
+}
+.pull-quote-cite {
+  font-family: var(--sans);
+  font-size: var(--t-caption);
+  letter-spacing: var(--tr-caption);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+@media (max-width: 640px) {
+  .metrics-poster {
+    grid-template-columns: 1fr;
+  }
+  .metric-card {
+    min-height: 160px;
+    padding: 28px 24px;
+  }
+  .quote-stage {
+    margin-top: 64px;
+  }
 }
 .case-link {
   display: inline-flex;
