@@ -2,7 +2,7 @@ import { profile } from "@/lib/content";
 
 export function Nav() {
   return (
-    <header className="nav-bar">
+    <nav className="nav-bar" aria-label="Primary">
       <div className="wrap nav-bar-inner">
         <span className="sig">{profile.name}</span>
         <div className="nav-links">
@@ -15,6 +15,6 @@ export function Nav() {
           Available for work
         </span>
       </div>
-    </header>
+    </nav>
   );
 }
