@@ -1145,12 +1145,20 @@ blockquote cite {
   }
 }
 
+/* Reduced-motion consolidated override — single source of truth.
+   Zeroes delays AND durations so staggered fade-ups don't leave content
+   invisible for their original delay window. Forces .reveal visible so
+   IntersectionObserver-gated content isn't hidden when JS is delayed. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    animation-delay: 0ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
   .reveal {
     opacity: 1;
@@ -1252,14 +1260,3 @@ blockquote cite {
   z-index: 2;
 }
 
-/* Reduced-motion universal override — honored across all phases */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
