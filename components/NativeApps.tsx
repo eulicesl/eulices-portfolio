@@ -52,7 +52,7 @@ export function NativeApps() {
                   width={260}
                   height={563}
                   className="native-app-shot"
-                  sizes="(max-width: 640px) 160px, 200px"
+                  sizes="(max-width: 820px) 220px, 320px"
                 />
               </div>
             ) : null}
