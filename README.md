@@ -88,6 +88,17 @@ Connected to Vercel — every push to `main` deploys to production. Preview URLs
 
 To deploy your own fork: `vercel` from the repo root, accept the defaults. Custom domain set via Vercel dashboard.
 
+## Lighthouse receipts
+
+Captured against production on 2026-04-23:
+
+| | Performance | Accessibility | Best Practices | SEO |
+| :--- | :---: | :---: | :---: | :---: |
+| Desktop | **100** | **100** | **100** | **100** |
+| Mobile | **91** | **100** | **100** | **100** |
+
+Raw JSON reports + methodology + remaining opportunities in [`lighthouse/`](./lighthouse/). Mobile perf 91 is almost entirely framework overhead (Next.js legacy JS, font render-blocking); the interesting metrics — TBT 3ms, CLS 0.000 — reflect the no-layout-shift / no-blocking-JS approach on the page.
+
 ## Redesign log
 
 The current design landed as PR [#2](https://github.com/eulicesl/eulices-portfolio/pull/2), shipped in six atomic phases on a single `redesign` branch:
