@@ -38,9 +38,9 @@ The mobile perf 91 is almost entirely framework overhead:
 - `image-delivery-insight` — phone screenshots could compress further; raw PNGs > `next/image`-generated AVIF fallback.
 
 LCP (3.3 s on mobile) is the single biggest lever. Candidates for a future optimization pass:
-1. Use `priority` on the hero headline's parent element (or preload the font asset used by `h1`).
-2. Move Shiki-rendered code to a chunk that loads after hero.
-3. Convert phone screenshots to WebP or let `next/image` serve AVIF.
+1. Preload the Fraunces font weight used by the hero `h1` (`<link rel="preload" as="font" crossorigin>`), or use the `adjustFontFallback` + size-adjust pattern to avoid the layout-invisible-text window. Note: the Next.js `priority` prop is only valid on `next/image`, so it doesn't apply here — this is a font-preload play, not an image-priority one.
+2. Move Shiki-rendered code to a chunk that loads after hero, so the syntax theme doesn't block initial paint.
+3. Convert phone screenshots to WebP, or let `next/image` serve AVIF automatically by ensuring the `Accept: image/avif` path is hit.
 
 None of these are worth shipping as part of this redesign — they're cosmetic gains on an already-passing score. Logged here so they're not silently forgotten.
 
@@ -49,13 +49,18 @@ None of these are worth shipping as part of this redesign — they're cosmetic g
 ```bash
 # From the repo root
 mkdir -p lighthouse
-npx lighthouse https://eulices-portfolio.vercel.app \
+
+# Pin the Lighthouse version to match the captured report (currently 13.1.0)
+# and point URL at either production or a local `npm run build && npm run start`.
+URL="${URL:-https://eulices-portfolio.vercel.app}"
+
+npx -y lighthouse@13.1.0 "$URL" \
   --output=json \
   --output-path=./lighthouse/desktop-report.json \
   --preset=desktop \
   --chrome-flags="--headless=new" --quiet
 
-npx lighthouse https://eulices-portfolio.vercel.app \
+npx -y lighthouse@13.1.0 "$URL" \
   --output=json \
   --output-path=./lighthouse/mobile-report.json \
   --chrome-flags="--headless=new" --quiet
