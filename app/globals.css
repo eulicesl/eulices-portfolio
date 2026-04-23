@@ -1025,8 +1025,9 @@ blockquote cite {
 /* REVEAL */
 .reveal {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(24px);
+  transition: opacity var(--dur-stage) var(--ease-out-expo),
+    transform var(--dur-stage) var(--ease-out-expo);
 }
 .reveal.visible {
   opacity: 1;
