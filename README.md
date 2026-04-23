@@ -88,6 +88,11 @@ Connected to Vercel — every push to `main` deploys to production. Preview URLs
 
 To deploy your own fork: `vercel` from the repo root, accept the defaults. Custom domain set via Vercel dashboard.
 
+## Documentation
+
+- **[`docs/PRD.md`](./docs/PRD.md)** — Product requirements: audience, goals, non-goals, information architecture, constraints.
+- **[`docs/DESIGN.md`](./docs/DESIGN.md)** — Design system reference: token architecture, components, accessibility, responsive strategy.
+
 ## Lighthouse receipts
 
 Captured against production on 2026-04-23:
