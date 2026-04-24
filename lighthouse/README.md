@@ -46,14 +46,14 @@ The mobile perf 91 is framework + Lighthouse-simulation overhead:
 - `render-blocking-insight` — Fraunces + Geist are self-hosted via `next/font` but still require a render pass.
 - `image-delivery-insight` — phone screenshots could compress further; raw PNGs > `next/image`-generated AVIF fallback.
 
-### LCP investigation — what was tried and what stuck
+### LCP investigation
 
 Mobile LCP sits at 3.3 s. PRs [#5](https://github.com/eulicesl/eulices-portfolio/pull/5) and [#6](https://github.com/eulicesl/eulices-portfolio/pull/6) landed two defensible perf changes aimed at moving this metric:
 
 1. **PR #5** — Fraunces `display: "swap"` → `display: "optional"`. Rationale: if the h1 is LCP, forcing fallback inside the block window pins LCP at FCP.
 2. **PR #6** — `.dot` pulse animation restricted to `opacity` + `will-change: opacity`. Rationale: animated `box-shadow` fires paint events that register with Chrome's LCP algorithm.
 
-**Both landed. Neither moved the lab metric.** The \`lcp-breakdown-insight\` audit continues to report the LCP element as \`body > nav.nav-bar > div.wrap > span.nav-status\` even after the pulse was confined to the compositor. Lighthouse's simulated-Slow-4G measurement appears to pin LCP on the nav-status span regardless of compositor optimizations — possibly because the LCP algorithm treats opacity oscillations as element "re-rendering" events even when they run purely on the compositor layer.
+**Both landed. Neither moved the lab metric.** The `lcp-breakdown-insight` audit continues to report the LCP element as `body > nav.nav-bar > div.wrap > span.nav-status` even after the pulse was confined to the compositor. Lighthouse's simulated-Slow-4G measurement appears to pin LCP on the nav-status span regardless of compositor optimizations — possibly because the LCP algorithm treats opacity oscillations as element "re-rendering" events even when they run purely on the compositor layer.
 
 Both PRs are kept because each is correct on its own merits: `display: "optional"` is the right choice when text-LCP is a real risk on slow networks, and compositor-safe animation (opacity-only with `will-change`) is best practice regardless of this particular LCP outcome.
 
