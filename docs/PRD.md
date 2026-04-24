@@ -92,7 +92,7 @@ Tracked here so they're not silently forgotten:
 
 ## 10. Revision history
 
-- **2026-04-24** — §9 item #3 (Mobile LCP) closed with decision after PRs [#5](https://github.com/eulicesl/eulices-portfolio/pull/5) + [#6](https://github.com/eulicesl/eulices-portfolio/pull/6) shipped two defensible perf changes that didn't move the Lighthouse lab metric. Mobile Perf holds at 91 (Good). Full investigation in `lighthouse/README.md`.
+- **2026-04-24** — §9 item #3 (Mobile LCP) closed with decision after PRs [#5](https://github.com/eulicesl/eulices-portfolio/pull/5) + [#6](https://github.com/eulicesl/eulices-portfolio/pull/6) shipped two defensible perf changes that didn't move the Lighthouse lab metric. Mobile Perf holds at 91 (Good). Full investigation in [`../lighthouse/README.md#lcp-investigation`](../lighthouse/README.md#lcp-investigation).
 - **2026-04-23** — Initial PRD written alongside `DESIGN.md` as part of establishing senior-engineering documentation discipline for the portfolio repo.
 - **2026-04-22** — Redesign v1 shipped (PR [#2](https://github.com/eulicesl/eulices-portfolio/pull/2), Apple-feel pass across 7 phases).
 - **2026-04-20** — Original portfolio site shipped to Vercel.
