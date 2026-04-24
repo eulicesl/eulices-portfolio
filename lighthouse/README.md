@@ -5,8 +5,8 @@ Raw audit output for the production deploy. Kept in-repo so the portfolio's perf
 ## Latest run
 
 - **URL:** https://eulices-portfolio.vercel.app
-- **Captured:** 2026-04-23
-- **Commit:** `ce29fdc` (`fix(a11y): wrap body sections in <main> landmark`)
+- **Captured:** 2026-04-24
+- **Commit:** `32758b2` (`perf(motion): add will-change:opacity to guarantee compositor promotion`)
 - **Tool:** Lighthouse 13.1.0, headless Chrome, default throttling
 
 ### Scores
@@ -22,27 +22,49 @@ Raw audit output for the production deploy. Kept in-repo so the portfolio's perf
 
 | Metric | Value | Threshold (good) |
 | --- | :---: | :---: |
-| First Contentful Paint | 945 ms | ≤ 1.8 s ✅ |
+| First Contentful Paint | 970 ms | ≤ 1.8 s ✅ |
 | Largest Contentful Paint | 3.3 s | ≤ 2.5 s ⚠️ |
-| Total Blocking Time | 3 ms | ≤ 200 ms ✅ |
+| Total Blocking Time | 1 ms | ≤ 200 ms ✅ |
 | Cumulative Layout Shift | 0.000 | ≤ 0.1 ✅ |
 | Speed Index | 3.7 s | ≤ 3.4 s ⚠️ |
 
+### Desktop Core Web Vitals
+
+| Metric | Value | Threshold (good) |
+| --- | :---: | :---: |
+| First Contentful Paint | 351 ms | ≤ 1.8 s ✅ |
+| Largest Contentful Paint | 747 ms | ≤ 2.5 s ✅ |
+| Total Blocking Time | 0 ms | ≤ 200 ms ✅ |
+| Cumulative Layout Shift | 0.000 | ≤ 0.1 ✅ |
+
 ### Remaining opportunities
 
-The mobile perf 91 is almost entirely framework overhead:
+The mobile perf 91 is framework + Lighthouse-simulation overhead:
 
 - `legacy-javascript-insight` — Next.js ships some legacy syntax for broad browser support.
 - `unused-javascript` — route-level chunks include code paths that aren't used on `/`.
 - `render-blocking-insight` — Fraunces + Geist are self-hosted via `next/font` but still require a render pass.
 - `image-delivery-insight` — phone screenshots could compress further; raw PNGs > `next/image`-generated AVIF fallback.
 
-LCP (3.3 s on mobile) is the single biggest lever. Candidates for a future optimization pass:
-1. Preload the Fraunces font weight used by the hero `h1` (`<link rel="preload" as="font" crossorigin>`), or use the `adjustFontFallback` + size-adjust pattern to avoid the layout-invisible-text window. Note: the Next.js `priority` prop is only valid on `next/image`, so it doesn't apply here — this is a font-preload play, not an image-priority one.
-2. Move Shiki-rendered code to a chunk that loads after hero, so the syntax theme doesn't block initial paint.
-3. Convert phone screenshots to WebP, or let `next/image` serve AVIF automatically by ensuring the `Accept: image/avif` path is hit.
+### LCP investigation — what was tried and what stuck
 
-None of these are worth shipping as part of this redesign — they're cosmetic gains on an already-passing score. Logged here so they're not silently forgotten.
+Mobile LCP sits at 3.3 s. PRs [#5](https://github.com/eulicesl/eulices-portfolio/pull/5) and [#6](https://github.com/eulicesl/eulices-portfolio/pull/6) landed two defensible perf changes aimed at moving this metric:
+
+1. **PR #5** — Fraunces `display: "swap"` → `display: "optional"`. Rationale: if the h1 is LCP, forcing fallback inside the block window pins LCP at FCP.
+2. **PR #6** — `.dot` pulse animation restricted to `opacity` + `will-change: opacity`. Rationale: animated `box-shadow` fires paint events that register with Chrome's LCP algorithm.
+
+**Both landed. Neither moved the lab metric.** The \`lcp-breakdown-insight\` audit continues to report the LCP element as \`body > nav.nav-bar > div.wrap > span.nav-status\` even after the pulse was confined to the compositor. Lighthouse's simulated-Slow-4G measurement appears to pin LCP on the nav-status span regardless of compositor optimizations — possibly because the LCP algorithm treats opacity oscillations as element "re-rendering" events even when they run purely on the compositor layer.
+
+Both PRs are kept because each is correct on its own merits: `display: "optional"` is the right choice when text-LCP is a real risk on slow networks, and compositor-safe animation (opacity-only with `will-change`) is best practice regardless of this particular LCP outcome.
+
+**Further levers that would likely move the Lighthouse number but weren't shipped:**
+
+1. Remove the nav pulse animation entirely. The element is decorative and not core to the design. Would eliminate the animated-element LCP candidate — at the cost of the subtle "availability" motion cue.
+2. Move the availability indicator out of the top nav (below the fold), so whatever it does doesn't interact with initial-viewport LCP.
+3. Reduce font payload by dropping the SOFT axis or splitting italic into a deferred load, at real editorial-typography cost.
+4. Convert phone screenshots to WebP/AVIF (moderate effort; probably helps Speed Index more than LCP).
+
+**Decision:** mobile Perf 91 is already in Lighthouse's "Good" range (≥ 90). The remaining cost/value ratio is poor — each further lever trades visible editorial or brand value for measurably-nothing-in-practice gains. Logged here so the next person (or next-me) doesn't re-enter the same loop without this context.
 
 ## How to reproduce
 
