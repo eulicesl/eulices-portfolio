@@ -87,11 +87,12 @@ Tracked here so they're not silently forgotten:
 
 1. **NOVA proof shots** — no capture yet for Live Activity / Dynamic Island / Vision OCR. These are the most distinctive architectural claims and deserve visible receipts.
 2. **Lumen shots** — current three screenshots are all the same conversation at different timestamps. Need 2 additional distinct screens (conversation list + settings).
-3. **Mobile LCP (3.3 s)** — the only Lighthouse metric below its "good" threshold. Candidate fix: preload the Fraunces weight used by the hero h1. Documented in [`../lighthouse/README.md`](../lighthouse/README.md).
+3. **Mobile LCP (3.3 s)** — investigated and closed with decision. Two perf PRs shipped: [#5](https://github.com/eulicesl/eulices-portfolio/pull/5) (Fraunces `display: "optional"`) and [#6](https://github.com/eulicesl/eulices-portfolio/pull/6) (compositor-only pulse animation, `will-change: opacity`). Both changes are correct on their own merits but did not move the Lighthouse lab metric — the LCP candidate is the nav availability pulse, not the hero h1, and Lighthouse's simulated Slow-4G continues to pin it there regardless of compositor optimizations. Decision: mobile Perf 91 is already in Lighthouse's "Good" range (≥ 90); remaining levers (remove pulse entirely, reduce font payload, relocate the availability indicator) trade visible brand/editorial value for no real-world gain. Full post-mortem in [`../lighthouse/README.md#lcp-investigation`](../lighthouse/README.md#lcp-investigation).
 4. **Nano AI → N.O.V.A. rebrand** in the private `nova-private` repo (6 remaining user-visible strings). Separate from this site; tracked privately.
 
 ## 10. Revision history
 
+- **2026-04-24** — §9 item #3 (Mobile LCP) closed with decision after PRs [#5](https://github.com/eulicesl/eulices-portfolio/pull/5) + [#6](https://github.com/eulicesl/eulices-portfolio/pull/6) shipped two defensible perf changes that didn't move the Lighthouse lab metric. Mobile Perf holds at 91 (Good). Full investigation in `lighthouse/README.md`.
 - **2026-04-23** — Initial PRD written alongside `DESIGN.md` as part of establishing senior-engineering documentation discipline for the portfolio repo.
 - **2026-04-22** — Redesign v1 shipped (PR [#2](https://github.com/eulicesl/eulices-portfolio/pull/2), Apple-feel pass across 7 phases).
 - **2026-04-20** — Original portfolio site shipped to Vercel.
