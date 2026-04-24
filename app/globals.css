@@ -210,6 +210,10 @@ body::before {
      LCP algorithm and incorrectly pin the nav pill as the LCP candidate. */
   box-shadow: 0 0 8px rgba(74, 222, 128, 0.55);
   animation: pulse 2.4s ease-in-out infinite;
+  /* Hoist to its own compositor layer so the opacity animation never
+     touches paint or layout. Explicit hint (will-change) + a tokenized
+     animated property (opacity) make this deterministic across browsers. */
+  will-change: opacity;
 }
 /* Compositor-only animation (opacity is a compositor-safe property).
    No layout thrash, no paint events, no LCP interference. */
