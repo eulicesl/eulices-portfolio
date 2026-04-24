@@ -205,17 +205,20 @@ body::before {
   border-radius: 50%;
   background: #4ade80;
   margin-right: 8px;
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+  /* Static glow via box-shadow (no animation on this property — see pulse).
+     Animated box-shadow triggers paint events which register with Chrome's
+     LCP algorithm and incorrectly pin the nav pill as the LCP candidate. */
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.55);
   animation: pulse 2.4s ease-in-out infinite;
 }
+/* Compositor-only animation (opacity is a compositor-safe property).
+   No layout thrash, no paint events, no LCP interference. */
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
   }
   50% {
-    opacity: 0.7;
-    box-shadow: 0 0 3px rgba(74, 222, 128, 0.3);
+    opacity: 0.55;
   }
 }
 
