@@ -9,6 +9,14 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/euliceslopez",
 } as const;
 
+/** Hero proof strip — one number per claim, Apple-style product-page rhythm. */
+export const heroHighlights = [
+  { value: "6", label: "Products shipped" },
+  { value: "2,200+", label: "Omi installs" },
+  { value: "95%", label: "Same-day charts" },
+  { value: "8", label: "Native Swift modules" },
+] as const;
+
 export const caseStudy = {
   title: "Graham Dermatology × Omi",
   partner: "Omi",

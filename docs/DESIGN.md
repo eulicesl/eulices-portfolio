@@ -206,5 +206,6 @@ No component tries to render identically at all widths; each has a defined colla
 
 ## Revision history
 
+- **2026-05-20** — v2 interaction layer: scroll progress, ⌘K command palette, iOS-style mobile sheet, scroll-spy nav, hero proof strip, stagger reveals, metric count-up, device frames, Apple HIG touch targets (`--touch-min: 44px`) and material vibrancy tokens.
 - **2026-04-23** — Initial DESIGN.md written alongside [`PRD.md`](./PRD.md) to document the token system and patterns landed in the v1 redesign.
 - **2026-04-22** — v1 redesign shipped across 7 phases ([PR #2](https://github.com/eulicesl/eulices-portfolio/pull/2)) — typographic scale, chapter system, motion tokens, full-bleed sections, metric poster, quote stage.
