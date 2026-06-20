@@ -17,6 +17,7 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
     if (!wrap) return;
     const root = wrap.querySelector("[data-theme]") as HTMLElement | null;
     if (!root) return;
+    const prevBodyBg = document.body.style.background;
 
     const nav = root.querySelector('nav[aria-label="Primary"]') as HTMLElement | null;
     const bar = root.querySelector("[data-bar]") as HTMLElement | null;
@@ -144,8 +145,7 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
     const t1 = setTimeout(onScroll, 250);
     const t2 = setTimeout(onScroll, 800);
     const fb = setTimeout(() => { if (pending.length) { revealAll(pending); pending = []; } }, 3500);
-    const railTimer = setInterval(updateRail, 200);
-    onCleanup(() => { clearTimeout(t1); clearTimeout(t2); clearTimeout(fb); clearInterval(railTimer); if (revealInterval) clearInterval(revealInterval); });
+    onCleanup(() => { clearTimeout(t1); clearTimeout(t2); clearTimeout(fb); if (revealInterval) clearInterval(revealInterval); });
 
     // ---------- theme ----------
     const applyTheme = (theme: string) => {
@@ -155,6 +155,8 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
       onScroll();
     };
     const toggleTheme = () => applyTheme((root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark");
+    // Restore the host page's body background when leaving /redesign so the theme doesn't leak.
+    onCleanup(() => { document.body.style.background = prevBodyBg; });
 
     // ---------- hover (style-hover attr) ----------
     const parseStyle = (str: string) => {
@@ -330,7 +332,8 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
     (() => {
       const canvas = contactCanvas, area = contactSection;
       if (!canvas || !area || !canvas.getContext) return;
-      const ctx = canvas.getContext("2d")!;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
       const hexToRgb = (hex: string) => { hex = (hex || "").replace("#", ""); if (hex.length === 3) hex = hex.split("").map((c) => c + c).join(""); const n = parseInt(hex, 16); if (isNaN(n)) return { r: 59, g: 111, b: 224 }; return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 }; };
       const c = hexToRgb(accent || "#3b6fe0"); const rgb = c.r + "," + c.g + "," + c.b;
       let w = 0, h = 0, dpr = 1, raf = 0;
@@ -360,7 +363,7 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
     })();
 
     // ---------- hero 3D (three.js) ----------
-    const glowTexture = (THREE: any) => { const cv = document.createElement("canvas"); cv.width = cv.height = 64; const x = cv.getContext("2d")!; const g = x.createRadialGradient(32, 32, 0, 32, 32, 32); g.addColorStop(0, "rgba(255,255,255,1)"); g.addColorStop(0.22, "rgba(255,255,255,0.85)"); g.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = g; x.beginPath(); x.arc(32, 32, 32, 0, Math.PI * 2); x.fill(); const t = new THREE.Texture(cv); t.needsUpdate = true; return t; };
+    const glowTexture = (THREE: any) => { const cv = document.createElement("canvas"); cv.width = cv.height = 64; const x = cv.getContext("2d"); if (x) { const g = x.createRadialGradient(32, 32, 0, 32, 32, 32); g.addColorStop(0, "rgba(255,255,255,1)"); g.addColorStop(0.22, "rgba(255,255,255,0.85)"); g.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = g; x.beginPath(); x.arc(32, 32, 32, 0, Math.PI * 2); x.fill(); } const t = new THREE.Texture(cv); t.needsUpdate = true; return t; };
     const initHero3D = (THREE: any) => {
       if (!THREE || !heroCanvas || !heroSection) return;
       let w = heroSection.clientWidth || window.innerWidth, h = heroSection.clientHeight || window.innerHeight;
