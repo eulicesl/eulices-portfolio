@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { nativeApps } from "@/lib/content";
+import { DeviceFrame } from "./DeviceFrame";
 import { RevealSection } from "./RevealSection";
 
 export function NativeApps() {
@@ -18,7 +19,7 @@ export function NativeApps() {
       </p>
 
       <div className="native-stack">
-        {nativeApps.map((app) => (
+        {nativeApps.map((app, index) => (
           <article className="native-app" key={app.name}>
             <div className="native-app-content">
               <div className="native-app-header">
@@ -41,18 +42,18 @@ export function NativeApps() {
                 rel="noopener noreferrer"
                 className="case-link"
               >
-                Join the beta on TestFlight <span>↗</span>
+                Join the beta on TestFlight <span aria-hidden="true">↗</span>
               </a>
             </div>
             {app.screenshot ? (
               <div className="native-app-preview">
-                <Image
+                <DeviceFrame
                   src={app.screenshot}
                   alt={app.screenshotAlt}
                   width={260}
                   height={563}
-                  className="native-app-shot"
                   sizes="(max-width: 820px) 220px, 320px"
+                  priority={index === 0}
                 />
               </div>
             ) : null}

@@ -1,3 +1,4 @@
+import { PortfolioChrome } from "@/components/chrome/PortfolioChrome";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { CaseStudy } from "@/components/CaseStudy";
@@ -11,6 +12,7 @@ import { Footer } from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <PortfolioChrome />
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>

@@ -1,5 +1,7 @@
 import { caseStudy } from "@/lib/content";
+import { MetricCounter } from "./MetricCounter";
 import { RevealSection } from "./RevealSection";
+import { Stagger } from "./Stagger";
 
 export function CaseStudy() {
   return (
@@ -17,23 +19,27 @@ export function CaseStudy() {
         Deployed 2024–2025; case study published November 2025.
       </p>
 
-      <div className="metrics-poster" aria-label="Clinic outcomes">
-        {caseStudy.metrics.map((m) => (
-          <figure className="metric-card" key={m.label}>
-            <figcaption className="metric-card-label">{m.label}</figcaption>
-            <div className="metric-card-value">
-              <span className="metric-card-before">{m.value}</span>
-              {"after" in m && m.after ? (
-                <>
-                  <span className="metric-card-arrow" aria-hidden="true">
-                    →
-                  </span>
-                  <span className="metric-card-after">{m.after}</span>
-                </>
-              ) : null}
-            </div>
-          </figure>
-        ))}
+      <div aria-label="Clinic outcomes">
+        <Stagger className="metrics-poster" stagger={90}>
+          {caseStudy.metrics.map((m) => (
+            <figure className="metric-card stagger-child" key={m.label}>
+              <figcaption className="metric-card-label">{m.label}</figcaption>
+              <div className="metric-card-value">
+                <span className="metric-card-before">{m.value}</span>
+                {"after" in m && m.after ? (
+                  <>
+                    <span className="metric-card-arrow" aria-hidden="true">
+                      →
+                    </span>
+                    <span className="metric-card-after">
+                      <MetricCounter value={m.after} />
+                    </span>
+                  </>
+                ) : null}
+              </div>
+            </figure>
+          ))}
+        </Stagger>
       </div>
 
       <div className="featured">
@@ -50,7 +56,7 @@ export function CaseStudy() {
           rel="noopener noreferrer"
           className="case-link"
         >
-          Full case study on omi.me <span>↗</span>
+          Full case study on omi.me <span aria-hidden="true">↗</span>
         </a>
       </div>
 

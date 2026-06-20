@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   novaMetrics,
   novaModules,
@@ -8,6 +7,8 @@ import {
 import { novaFallbackSnippet } from "@/lib/code";
 import { RevealSection } from "./RevealSection";
 import { CodeWindow } from "./CodeWindow";
+import { DeviceFrame } from "./DeviceFrame";
+import { Stagger } from "./Stagger";
 
 export function NovaDeepDive() {
   return (
@@ -77,24 +78,25 @@ export function NovaDeepDive() {
 
         <div>
           <div className="subhead">Running on device</div>
-          <div className="nova-shots">
+          <Stagger className="nova-shots" stagger={100}>
             {novaShots.map((shot) => (
-              <figure className="nova-shot" key={shot.src}>
-                <Image
+              <div className="nova-shot stagger-child" key={shot.src}>
+                <DeviceFrame
                   src={shot.src}
                   alt={shot.alt}
-                  width={260}
-                  height={563}
-                  className="nova-shot-img"
+                  width={200}
+                  height={433}
                   sizes="(max-width: 640px) 140px, 200px"
+                  footer={
+                    <>
+                      <span className="nova-shot-caption">{shot.caption}</span>
+                      <span className="nova-shot-note">{shot.note}</span>
+                    </>
+                  }
                 />
-                <figcaption>
-                  <span className="nova-shot-caption">{shot.caption}</span>
-                  <span className="nova-shot-note">{shot.note}</span>
-                </figcaption>
-              </figure>
+              </div>
             ))}
-          </div>
+          </Stagger>
         </div>
       </div>
     </RevealSection>

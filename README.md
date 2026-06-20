@@ -18,6 +18,7 @@ This is modeled on Apple's product-page aesthetic (apple.com/macbook-pro), adapt
 - **Oversized editorial typography.** Fluid display scale via `clamp()` with a tracking ladder that tightens as the type gets bigger — the same spacing discipline SF Pro uses on apple.com.
 - **Proof over polish.** Real code snippets (rendered with Shiki at build time), real screenshots, real metrics — no decorative Three.js or placeholder "Lorem Ipsum" energy.
 - **Stagecraft, not scroll-jacking.** Reveal animations run through `IntersectionObserver` and are universally suppressed under `prefers-reduced-motion`. Nothing hijacks the user's scroll velocity.
+- **Apple HIG interaction layer.** 44px touch targets, vibrancy nav material, iOS-style mobile sheet, scroll progress, section scroll-spy, ⌘K command palette, staggered reveals, metric count-up, and iPhone device frames on screenshots.
 - **Audit-friendly Git history.** Conventional commits. Atomic, revertable. Each PR tells a story with design rationale in the body.
 
 ## Architecture
