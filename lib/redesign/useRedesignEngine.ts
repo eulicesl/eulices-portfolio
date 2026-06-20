@@ -50,13 +50,15 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
       };
       if (prefersReduced()) { el.textContent = fmt(target); return; }
       const dur = 1300, start = performance.now();
+      let animId = 0;
       const step = (now: number) => {
         const t = Math.min(1, (now - start) / dur);
         const e = 1 - Math.pow(1 - t, 3);
         el.textContent = fmt(target * e);
-        if (t < 1) requestAnimationFrame(step);
+        if (t < 1) animId = requestAnimationFrame(step);
       };
-      requestAnimationFrame(step);
+      animId = requestAnimationFrame(step);
+      onCleanup(() => cancelAnimationFrame(animId));
     };
     const kickCounts = (el: any) => {
       if (!el || !el.querySelectorAll) return;
@@ -277,7 +279,16 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
       const nodes = { request: q('[data-node="request"]'), fm: q('[data-node="fm"]'), ollama: q('[data-node="ollama"]'), response: q('[data-node="response"]') };
       const packet = q("[data-packet]"), fill = q('[data-track="mainfill"]'), branch = q('[data-track="branch"]'), fmStatus = q("[data-fm-status]");
       if (!packet || !nodes.request || !nodes.fm || !nodes.ollama || !nodes.response || !fill || !branch) return;
+      // Node centers (relative to the stage) only change on layout/resize, so cache them
+      // instead of measuring every animation frame — avoids forced synchronous layout.
       const center = (el: HTMLElement) => { const r = el.getBoundingClientRect(), s = stage.getBoundingClientRect(); return { x: r.left + r.width / 2 - s.left, y: r.top + r.height / 2 - s.top }; };
+      let coords = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
+      const updateCoords = () => { coords = [center(nodes.request!), center(nodes.fm!), center(nodes.ollama!), center(nodes.response!)]; };
+      updateCoords();
+      let flowRo: ResizeObserver | null = null;
+      if (typeof ResizeObserver !== "undefined") { flowRo = new ResizeObserver(updateCoords); flowRo.observe(stage); }
+      else window.addEventListener("resize", updateCoords, { passive: true });
+      onCleanup(() => { if (flowRo) flowRo.disconnect(); else window.removeEventListener("resize", updateCoords); });
       const setPhase = (fallback: boolean) => {
         if (fallback) {
           nodes.fm!.style.opacity = "0.5"; nodes.fm!.style.borderColor = "rgba(245,180,90,0.55)";
@@ -300,8 +311,8 @@ export function useRedesignEngine(wrapRef: RefObject<HTMLElement | null>, opts: 
         if (el < lapDur) {
           const t = el / lapDur;
           const wps = phase
-            ? [center(nodes.request!), center(nodes.fm!), center(nodes.ollama!), center(nodes.response!)]
-            : [center(nodes.request!), center(nodes.fm!), center(nodes.response!)];
+            ? [coords[0], coords[1], coords[2], coords[3]]
+            : [coords[0], coords[1], coords[3]];
           const segs = wps.length - 1, st = Math.min(segs - 1, Math.floor(t * segs)), lt = t * segs - st;
           const a = wps[st], b = wps[st + 1];
           packet.style.opacity = "1";
