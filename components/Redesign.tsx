@@ -35,7 +35,7 @@ export default function Redesign(props: RedesignProps) {
           <div data-bar aria-hidden="true" style={s("position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent,#3b6fe0);transform:scaleX(0);transform-origin:0 50%;z-index:200;will-change:transform;")}></div>
           <Nav />
           <Rail />
-          <main id="main-content">
+          <main id="main-content" tabIndex={-1}>
             <Hero />
             <CaseStudy />
             <NativeApps />
