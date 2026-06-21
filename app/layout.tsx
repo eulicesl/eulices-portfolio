@@ -43,12 +43,14 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Eulices Lopez",
+    images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Eulices Lopez — Founding Engineer",
     description:
       "Built & deployed an AI scribe at Graham Dermatology (featured on Omi). 6 products shipped, 2,200+ users.",
+    images: ["/og.png"],
   },
 };
 

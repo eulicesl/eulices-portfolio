@@ -31,17 +31,19 @@ export default function Redesign(props: RedesignProps) {
       <RedesignStyles />
       <div ref={wrapRef}>
         <div data-theme={defaultDark ? "dark" : "light"} style={s(`--accent:${accent};font-family:var(--font-sans),-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','Helvetica Neue',Helvetica,sans-serif;background:var(--page);color:var(--ink);overflow-x:hidden;position:relative;`)}>
-          <a href="#case-study" className="skip-link">Skip to content</a>
+          <a href="#main-content" className="skip-link">Skip to content</a>
           <div data-bar aria-hidden="true" style={s("position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent,#3b6fe0);transform:scaleX(0);transform-origin:0 50%;z-index:200;will-change:transform;")}></div>
           <Nav />
           <Rail />
-          <Hero />
-          <CaseStudy />
-          <NativeApps />
-          <NovaDeepDive />
-          <OmiApps />
-          <Stack />
-          <Contact />
+          <main id="main-content">
+            <Hero />
+            <CaseStudy />
+            <NativeApps />
+            <NovaDeepDive />
+            <OmiApps />
+            <Stack />
+            <Contact />
+          </main>
           <Footer />
         </div>
       </div>
